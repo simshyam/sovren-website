@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sovren - Systems That Scale</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dhurjati&family=Raleway:wght@200;300;400;700;800;900&family=Manrope:wght@200;300;400;500;600&display=swap');
+
+:root {
+--black: #07070a;
+--white: #eeeee8;
+--lavender: #c7a8ff;
+--purple: #3f00ac;
+--purple-mid: #7b3fd4;
+--accent-dim: rgba(199, 168, 255, 0.08);
+--border: rgba(199,168,255,0.08);
+--muted: #1e1428;
+--card-bg: #0f0a1a;
+--card-bg-hover: #160d24;
+--grey-text: #b8b0c8;
+--grey-dark: #4a4460;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+background: var(--black);
+color: var(--white);
+font-family: 'Manrope', sans-serif;
+font-weight: 300;
+overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 28px 60px;
+background: rgba(7,7,10,0.88);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(--border);
+}
+
+.nav-left { display: flex; align-items: center; gap: 22px; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-wordmark { font-family: 'Dhurjati', sans-serif; font-weight: 400; font-size: 34px; letter-spacing: 0.28em; text-transform: uppercase; background: linear-gradient(90deg, #c7a8ff, #3f00ac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; background: none; border: none; cursor: pointer; padding: 0; z-index: 210; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 1px; transition: transform 0.25s ease, opacity 0.2s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+.nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 190; }
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+.nav-menu { position: fixed; top: 0; left: 0; height: 100vh; width: 300px; max-width: 82vw; background: var(--card-bg); border-right: 1px solid var(--border); padding: 110px 44px 44px; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform 0.32s ease; z-index: 200; }
+.nav-menu.open { transform: translateX(0); }
+.nav-menu a { font-family: 'Manrope', sans-serif; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-text); text-decoration: none; padding: 20px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+.nav-menu a:hover { color: var(--lavender); }
+
+.nav-cta { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 12px 28px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; display: inline-block; }
+.nav-cta:hover { opacity: 0.85; }
+@media (max-width: 480px) {
+  nav { padding: 22px 20px; }
+  .nav-cta { padding: 10px 18px; font-size: 10px; }
+}
+
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 40px 100px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%); pointer-events: none; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 32px; font-weight: 700; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+.hero-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(52px, 8vw, 110px); letter-spacing: 0.12em; text-transform: uppercase; line-height: 0.95; color: var(--white); opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+.hero-title span { background: linear-gradient(90deg, var(--lavender), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-tag { margin-top: 26px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-text); opacity: 0; animation: fadeUp 0.8s 0.45s forwards; }
+.hero-sub { margin-top: 20px; max-width: 520px; font-size: 15px; line-height: 1.9; color: var(--grey-text); font-weight: 400; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero-actions { margin-top: 52px; display: flex; gap: 16px; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+.btn-solid { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 16px 36px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; }
+.btn-solid:hover { opacity: 0.85; }
+.btn-ghost { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavender); background: transparent; border: 1px solid rgba(199,168,255,0.25); padding: 16px 36px; cursor: pointer; transition: border-color 0.2s, color 0.2s; font-weight: 400; text-decoration: none; }
+.btn-ghost:hover { border-color: var(--lavender); color: var(--white); }
+
+section { border-top: 1px solid var(--border); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 72px 60px; }
+.section-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
+.modules-label { text-align: center; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
+.section-label { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
+.section-title { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 36px; letter-spacing: 0.06em; color: var(--white); }
+.section-sub { margin-top: 20px; max-width: 640px; font-size: 14px; line-height: 1.9; color: var(--grey-text); font-weight: 400; }
+
+.modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.module-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 40px 32px; transition: background 0.3s, border-color 0.3s; }
+.module-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.module-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: 0.3em; color: var(--lavender); margin-bottom: 20px; opacity: 0.7; }
+.module-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.06em; color: var(--white); margin-bottom: 14px; }
+.module-body { font-size: 13px; line-height: 1.9; color: var(--grey-text); font-weight: 400; }
+.modules-cta { display: flex; justify-content: center; margin-top: 36px; }
+
+.phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; position: relative; }
+.phase-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 40px 32px; transition: background 0.3s, border-color 0.3s; position: relative; }
+.phase-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.phase-card:not(:last-child)::after { content: '→'; position: absolute; top: 40px; right: -13px; color: var(--lavender); font-size: 16px; z-index: 2; opacity: 0.8; }
+.phase-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: 0.3em; color: var(--lavender); margin-bottom: 20px; opacity: 0.7; }
+.phase-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.06em; color: var(--white); margin-bottom: 14px; text-transform: uppercase; }
+.phase-body { font-size: 13px; line-height: 1.9; color: var(--grey-text); font-weight: 400; }
+.phase-body strong { color: var(--white); font-weight: 600; }
+.phases-closing { margin-top: 40px; text-align: center; font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.04em; color: var(--white); max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+@media (max-width: 768px) {
+.phases-grid { grid-template-columns: 1fr; }
+.phase-card:not(:last-child)::after { content: '↓'; top: auto; bottom: -13px; right: 40px; }
+}
+
+.toolkit-wrap { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.toolkit-track { display: flex; gap: 56px; width: max-content; animation: scroll 30s linear infinite; align-items: center; }
+.toolkit-track span { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.04em; color: var(--grey-text); white-space: nowrap; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.functions-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
+.function-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 40px 30px; position: relative; transition: background 0.3s, border-color 0.3s; cursor: default; flex: 1 1 240px; max-width: 268px; }
+.function-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.fn-number { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: 0.2em; color: var(--lavender); margin-bottom: 18px; opacity: 0.8; }
+.fn-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.06em; color: var(--white); margin-bottom: 14px; text-transform: uppercase; }
+.fn-body { font-size: 12.5px; line-height: 1.85; color: var(--grey-text); font-weight: 400; }
+@media (max-width: 560px) { .function-card { flex-basis: 100%; max-width: 340px; } }
+
+.framework-diagram-wrap { display: block; }
+.framework-diagram { width: 100%; height: auto; display: block; }
+.fw-box { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.25); border-radius: 3px; width: 100%; height: 100%; padding: 18px 22px; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
+.fw-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: 0.28em; color: var(--lavender); margin: 0 0 8px; opacity: 0.8; }
+.fw-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; color: var(--white); margin: 0 0 8px; text-transform: uppercase; }
+.fw-body { font-size: 12px; line-height: 1.6; color: var(--grey-text); font-weight: 400; margin: 0; }
+.framework-mobile { display: none; max-width: 640px; margin: 0 auto; }
+.fw-mobile-item { position: relative; }
+.fw-mobile-item:not(:last-child) { margin-bottom: 44px; }
+.fw-mobile-item:not(:last-child)::after { content: '↓'; position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); color: var(--lavender); font-size: 20px; line-height: 1; }
+@media (max-width: 1099px) {
+.framework-diagram-wrap { display: none; }
+.framework-mobile { display: flex; flex-direction: column; }
+}
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+footer { border-top: 1px solid var(--border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-wordmark { font-family: 'Dhurjati', sans-serif; font-weight: 400; font-size: 18px; letter-spacing: 0.28em; text-transform: uppercase; background: linear-gradient(90deg, #c7a8ff, #3f00ac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 11px; color: var(--grey-text); text-decoration: none; letter-spacing: 0.05em; }
+.footer-links a:hover { color: var(--lavender); }
+.footer-copy { font-size: 11px; color: var(--grey-dark); letter-spacing: 0.1em; }
+
+@media (max-width: 768px) {
+nav { padding: 20px 24px; }
+.hero { padding: 120px 24px 80px; }
+.wrap { padding: 56px 24px; }
+footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+}
+@media (max-width: 420px) {
+.modules-grid { grid-template-columns: 1fr; }
+.phases-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav-left">
+<button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+<a class="nav-logo" href="index.html"><img src="assets/sovren-logo-light.png" alt="Sovren Consulting" style="height:46px;"/></a>
+</div>
+<a class="nav-cta" href="https://forms.gle/vsA7gLc9hSPCap3MA" target="_blank" rel="noopener noreferrer">Book a Consult</a>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-menu" id="navMenu">
+<a href="who-we-are.html">Who We Are</a>
+<a href="portfolio.html">Portfolio</a>
+</div>
+
+<section class="hero">
+<p class="hero-eyebrow">Operational Consulting for Small Businesses</p>
+<h1 class="hero-title">Systems<br/><span>That</span><br/>Scale</h1>
+<p class="hero-tag">Human first, AI-powered</p>
+<div class="hero-actions">
+<a class="btn-solid" href="portfolio.html">Portfolio</a>
+</div>
+</section>
+
+<section id="phases">
+<div class="wrap">
+<div class="section-header">
+<p class="section-label">How We Work</p>
+<h2 class="section-title">Built in order. No shortcuts.</h2>
+<p class="section-sub">Most consulting firms sell you a menu of services. We don't, because sustainable change isn't a menu, it's a sequence. Every business we work with moves through the same three phases, in order, at their own pace. No firing your team and dropping in AI overnight. No project that ends and disappears. Just a foundation, then connection, then intelligence, each one built on the last.</p>
+</div>
+<div class="phases-grid">
+<div class="phase-card"><p class="phase-num">#1</p><h3 class="phase-title">Infrastructure</h3><p class="phase-body"><strong>Getting everything off paper and into systems.</strong> Before anything can be automated or intelligent, it has to exist digitally. We put the core systems in place, CRM, email, cloud storage, billing, bookkeeping, so nothing depends on one person's memory or a filing cabinet.</p></div>
+<div class="phase-card"><p class="phase-num">#2</p><h3 class="phase-title">Integration</h3><p class="phase-body"><strong>Making those systems talk to each other.</strong> A business with five disconnected tools still runs on manual labor, someone's still the glue. We connect what you have and automate the lowest-stakes, highest-friction handoffs first, so your team stops doing the busywork between systems.</p></div>
+<div class="phase-card"><p class="phase-num">#3</p><h3 class="phase-title">Autonomy</h3><p class="phase-body"><strong>Layering in AI, one task at a time.</strong> Not a rip-and-replace. We build AI capability gradually, starting with narrow, well-bounded tasks, so each layer earns its place before the next one goes in. The result is AI that takes over real work over time, without the abrupt disruption other firms sell.</p></div>
+</div>
+<p class="phases-closing">This is what human-first, AI-powered actually looks like in practice: not a slogan, a sequence.</p>
+<div class="modules-cta">
+<a class="btn-ghost" href="who-we-are.html">Who We Are</a>
+</div>
+</div>
+</section>
+
+<section id="toolkit">
+<div class="wrap">
+<div class="section-header">
+<p class="section-label">Our Toolkit</p>
+<h2 class="section-title">The platforms we know inside out</h2>
+<p class="section-sub">If you already use them, we speak the language. If you don't, we'll recommend what actually fits.</p>
+</div>
+<div class="toolkit-wrap">
+<div class="toolkit-track" id="toolkit-track"></div>
+</div>
+</div>
+</section>
+
+<section id="framework">
+<div class="wrap">
+<div class="section-header">
+<p class="section-label">The Sovren Framework</p>
+<h2 class="section-title">5 Core Functions of a Scalable Business</h2>
+<p class="section-sub">Our systems-thinking approach applies universal principles to business operations. This framework is analyzed over time, and used as the foundation for long-term partnership; we don't deliver a project and disappear. We build in phases, layer systems on top of each other, making your business more robust over time.</p>
+</div>
+<div class="framework-diagram-wrap">
+<svg class="framework-diagram" viewBox="0 0 1030 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+<path d="M0,0 L10,5 L0,10 Z" fill="#c7a8ff"/>
+</marker>
+</defs>
+<line x1="220" y1="150" x2="220" y2="186" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
+<line x1="220" y1="330" x2="220" y2="366" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
+<line x1="800" y1="170" x2="800" y2="306" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
+<path d="M430,440 H510 V90 H586" stroke="#c7a8ff" stroke-width="2" fill="none" marker-end="url(#arrowHead)"/>
+<foreignObject x="10" y="10" width="420" height="140">
+<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#1</p><h3 class="fw-title">Inputs</h3><p class="fw-body">We help you identify which inputs, clients, hires, and processes, actually serve your growth instead of draining it.</p></div>
+</foreignObject>
+<foreignObject x="10" y="190" width="420" height="140">
+<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#2</p><h3 class="fw-title">Transformation</h3><p class="fw-body">We streamline how those inputs get converted into results, cutting waste while staying adaptable.</p></div>
+</foreignObject>
+<foreignObject x="10" y="370" width="420" height="140">
+<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#3</p><h3 class="fw-title">Outputs</h3><p class="fw-body">We make sure what your business produces creates value beyond itself, not just internal busywork.</p></div>
+</foreignObject>
+<foreignObject x="590" y="10" width="420" height="160">
+<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#4</p><h3 class="fw-title">Regulation</h3><p class="fw-body">We build feedback loops that catch problems early, both inside the business and in the market around it.</p></div>
+</foreignObject>
+<foreignObject x="590" y="310" width="420" height="160">
+<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#5</p><h3 class="fw-title">Intelligence</h3><p class="fw-body">We give your business the visibility to learn from every cycle, replicate what works, and improve on it.</p></div>
+</foreignObject>
+</svg>
+</div>
+<div class="fw-mobile-stack framework-mobile">
+<div class="fw-mobile-item fw-box"><p class="fw-num">#1</p><h3 class="fw-title">Inputs</h3><p class="fw-body">We help you identify which inputs, clients, hires, and processes, actually serve your growth instead of draining it.</p></div>
+<div class="fw-mobile-item fw-box"><p class="fw-num">#2</p><h3 class="fw-title">Transformation</h3><p class="fw-body">We streamline how those inputs get converted into results, cutting waste while staying adaptable.</p></div>
+<div class="fw-mobile-item fw-box"><p class="fw-num">#3</p><h3 class="fw-title">Outputs</h3><p class="fw-body">We make sure what your business produces creates value beyond itself, not just internal busywork.</p></div>
+<div class="fw-mobile-item fw-box"><p class="fw-num">#4</p><h3 class="fw-title">Regulation</h3><p class="fw-body">We build feedback loops that catch problems early, both inside the business and in the market around it.</p></div>
+<div class="fw-mobile-item fw-box"><p class="fw-num">#5</p><h3 class="fw-title">Intelligence</h3><p class="fw-body">We give your business the visibility to learn from every cycle, replicate what works, and improve on it.</p></div>
+</div>
+</div>
+</section>
+
+<footer id="book-consult">
+<img src="assets/sovren-logo-light.png" alt="Sovren Consulting" style="height:36px;"/>
+<div class="footer-links">
+<a href="who-we-are.html">Who We Are</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="privacy.html">Privacy Policy &amp; Terms</a>
+</div>
+<span class="footer-copy">© 2026 Sovren. All rights reserved.</span>
+</footer>
+
+<script>
+const tools = ["Claude","OpenAI","Lovable","Shopify","GoDaddy","Duda","Wix","WordPress","TaxDome","Jane App","Canva","HubSpot","SEMRUSH","Salesforce","Adobe","Microsoft 365","G Suite","GitHub","Calendly","ClickUp","Make.com"];
+const track = document.getElementById('toolkit-track');
+[...tools, ...tools].forEach(t => {
+  const span = document.createElement('span');
+  span.textContent = t;
+  track.appendChild(span);
+});
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+function closeMenu() {
+  navMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  navOverlay.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+}
+function toggleMenu() {
+  const isOpen = navMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+  navOverlay.classList.toggle('open', isOpen);
+  hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+}
+hamburgerBtn.addEventListener('click', toggleMenu);
+navOverlay.addEventListener('click', closeMenu);
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+</script>
+
+</body>
+</html>

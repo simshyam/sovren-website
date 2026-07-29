@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sovren - Portfolio / GITIKA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dhurjati&family=Raleway:wght@200;300;400;700;800;900&family=Manrope:wght@200;300;400;500;600&display=swap');
+
+:root {
+--black: #07070a;
+--white: #eeeee8;
+--lavender: #c7a8ff;
+--purple: #3f00ac;
+--purple-mid: #7b3fd4;
+--accent-dim: rgba(199, 168, 255, 0.08);
+--border: rgba(199,168,255,0.08);
+--muted: #1e1428;
+--card-bg: #0f0a1a;
+--card-bg-hover: #160d24;
+--grey-text: #b8b0c8;
+--grey-dark: #4a4460;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+background: var(--black);
+color: var(--white);
+font-family: 'Manrope', sans-serif;
+font-weight: 300;
+overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 28px 60px;
+background: rgba(7,7,10,0.88);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(--border);
+}
+
+.nav-left { display: flex; align-items: center; gap: 22px; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-wordmark { font-family: 'Dhurjati', sans-serif; font-weight: 400; font-size: 34px; letter-spacing: 0.28em; text-transform: uppercase; background: linear-gradient(90deg, #c7a8ff, #3f00ac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; background: none; border: none; cursor: pointer; padding: 0; z-index: 210; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 1px; transition: transform 0.25s ease, opacity 0.2s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+.nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 190; }
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+.nav-menu { position: fixed; top: 0; left: 0; height: 100vh; width: 300px; max-width: 82vw; background: var(--card-bg); border-right: 1px solid var(--border); padding: 110px 44px 44px; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform 0.32s ease; z-index: 200; }
+.nav-menu.open { transform: translateX(0); }
+.nav-menu a { font-family: 'Manrope', sans-serif; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-text); text-decoration: none; padding: 20px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+.nav-menu a:hover { color: var(--lavender); }
+
+.nav-cta { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 12px 28px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; display: inline-block; }
+.nav-cta:hover { opacity: 0.85; }
+@media (max-width: 480px) {
+  nav { padding: 22px 20px; }
+  .nav-cta { padding: 10px 18px; font-size: 10px; }
+}
+
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 40px 100px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%); pointer-events: none; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 32px; font-weight: 700; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+.hero-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(52px, 8vw, 110px); letter-spacing: 0.12em; text-transform: uppercase; line-height: 0.95; color: var(--white); opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+.hero-title span { background: linear-gradient(90deg, var(--lavender), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-tag { margin-top: 26px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-text); opacity: 0; animation: fadeUp 0.8s 0.45s forwards; }
+.hero-sub { margin-top: 20px; max-width: 520px; font-size: 15px; line-height: 1.9; color: var(--grey-text); font-weight: 400; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero-actions { margin-top: 52px; display: flex; gap: 16px; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+.btn-solid { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 16px 36px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; }
+.btn-solid:hover { opacity: 0.85; }
+.btn-ghost { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavender); background: transparent; border: 1px solid rgba(199,168,255,0.25); padding: 16px 36px; cursor: pointer; transition: border-color 0.2s, color 0.2s; font-weight: 400; text-decoration: none; }
+.btn-ghost:hover { border-color: var(--lavender); color: var(--white); }
+
+section { border-top: 1px solid var(--border); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 72px 60px; }
+.section-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
+.modules-label { text-align: center; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
+.section-label { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
+.section-title { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 36px; letter-spacing: 0.06em; color: var(--white); }
+.section-sub { margin-top: 20px; max-width: 640px; font-size: 14px; line-height: 1.9; color: var(--grey-text); font-weight: 400; }
+
+.modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.module-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 40px 32px; transition: background 0.3s, border-color 0.3s; }
+.module-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.module-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: 0.3em; color: var(--lavender); margin-bottom: 20px; opacity: 0.7; }
+.module-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.06em; color: var(--white); margin-bottom: 14px; }
+.module-body { font-size: 13px; line-height: 1.9; color: var(--grey-text); font-weight: 400; }
+.modules-cta { display: flex; justify-content: center; margin-top: 36px; }
+
+.toolkit-wrap { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.toolkit-track { display: flex; gap: 56px; width: max-content; animation: scroll 30s linear infinite; align-items: center; }
+.toolkit-track span { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.04em; color: var(--grey-text); white-space: nowrap; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.functions-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
+.function-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 40px 30px; position: relative; transition: background 0.3s, border-color 0.3s; cursor: default; flex: 1 1 240px; max-width: 268px; }
+.function-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.fn-number { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: 0.2em; color: var(--lavender); margin-bottom: 18px; opacity: 0.8; }
+.fn-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.06em; color: var(--white); margin-bottom: 14px; text-transform: uppercase; }
+.fn-body { font-size: 12.5px; line-height: 1.85; color: var(--grey-text); font-weight: 400; }
+@media (max-width: 560px) { .function-card { flex-basis: 100%; max-width: 340px; } }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+footer { border-top: 1px solid var(--border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-wordmark { font-family: 'Dhurjati', sans-serif; font-weight: 400; font-size: 18px; letter-spacing: 0.28em; text-transform: uppercase; background: linear-gradient(90deg, #c7a8ff, #3f00ac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 11px; color: var(--grey-text); text-decoration: none; letter-spacing: 0.05em; }
+.footer-links a:hover { color: var(--lavender); }
+.footer-copy { font-size: 11px; color: var(--grey-dark); letter-spacing: 0.1em; }
+
+@media (max-width: 768px) {
+nav { padding: 20px 24px; }
+.hero { padding: 120px 24px 80px; }
+.wrap { padding: 56px 24px; }
+footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+}
+@media (max-width: 420px) {
+.modules-grid { grid-template-columns: 1fr; }
+}
+
+.page-hero { padding: 160px 60px 60px; text-align: center; border-top: none; }
+.page-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; font-weight: 700; }
+.page-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(36px, 5vw, 60px); letter-spacing: 0.06em; color: var(--white); text-transform: uppercase; }
+.page-sub { margin: 24px auto 0; max-width: 640px; font-size: 15px; line-height: 1.9; color: var(--grey-text); }
+
+/* portfolio hub cards */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.portfolio-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 44px 32px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; transition: background 0.3s, border-color 0.3s; }
+.portfolio-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.portfolio-card img { height: 76px; width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 28px; display: block; }
+.portfolio-card h3 { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); margin-bottom: 10px; }
+.portfolio-card p { font-size: 13px; line-height: 1.7; color: var(--grey-text); }
+.portfolio-card .view-link { margin-top: 20px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
+@media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+/* case study header */
+.case-header { padding: 150px 60px 40px; border-top: none; }
+.case-header .inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: flex-start; }
+.breadcrumb { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
+.case-logo { height: 68px; width: auto; max-width: 100%; object-fit: contain; object-position: left; display: block; }
+
+/* profile summary cards */
+.profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 56px; }
+.profile-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 28px 26px; }
+.profile-card .label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender); margin-bottom: 10px; }
+.profile-card .value { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); }
+@media (max-width: 760px) { .profile-grid { grid-template-columns: 1fr; } }
+
+.case-block { margin-bottom: 56px; }
+.case-block h3 { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 24px; color: var(--white); margin-bottom: 20px; letter-spacing: 0.04em; }
+.case-block p { font-size: 14.5px; line-height: 1.95; color: var(--grey-text); margin-bottom: 18px; max-width: 780px; }
+.case-block p:last-child { margin-bottom: 0; }
+.outcomes-list { list-style: none; padding: 0; }
+.outcomes-list li { position: relative; padding-left: 26px; font-size: 14.5px; line-height: 1.8; color: var(--grey-text); margin-bottom: 14px; max-width: 780px; }
+.outcomes-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: var(--lavender); }
+
+.case-cta { margin-top: 28px; }
+.back-link-wrap { display: flex; justify-content: center; margin-top: 60px; }
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav-left">
+<button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+<a class="nav-logo" href="index.html"><img src="assets/sovren-logo-light.png" alt="Sovren Consulting" style="height:46px;"/></a>
+</div>
+<a class="nav-cta" href="https://forms.gle/vsA7gLc9hSPCap3MA" target="_blank" rel="noopener noreferrer">Book a Consult</a>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-menu" id="navMenu">
+<a href="who-we-are.html">Who We Are</a>
+<a href="portfolio.html">Portfolio</a>
+</div>
+
+<section class="case-header">
+<div class="inner">
+<p class="breadcrumb">Portfolio / GITIKA</p>
+<img class="case-logo" src="assets/gitika-logo-white.png" alt="GITIKA logo"/>
+</div>
+</section>
+<section id="case-body">
+<div class="wrap" style="padding-top:0; padding-bottom:0;">
+<div class="profile-grid">
+<div class="profile-card"><p class="label">Industry</p><p class="value">Fashion</p></div>
+<div class="profile-card"><p class="label">Modules</p><p class="value">Online Visibility & Core Operations</p></div>
+<div class="profile-card"><p class="label">Framework Focus</p><p class="value">Transformation &amp; Regulation</p></div>
+</div>
+
+<div class="case-block">
+<h3>Profile</h3>
+<p>Gitika is a handbag designer and retailer based in Toronto, selling worldwide. A recently graduated founder with a passion for travel and sustainability, she launched a line of eco-conscious, gender-fluid handbags designed to celebrate her roots. She spent a year in India studying the craft of design and sustainable production, working directly with local artisans and manufacturers to curate her first collection.</p>
+<p>This engagement focused on the Transformation and Regulation functions of the Sovren Framework. When Sovren came in, the brand was ready to launch but had no operational or digital infrastructure behind it. There was no storefront, no email or social presence, no project management system, and no way to measure what was working. Gitika needed a full go-to-market foundation built fast, without sacrificing the sustainability values at the core of the brand.</p>
+</div>
+
+<div class="case-block">
+<h3>Project Outcomes</h3>
+<ul class="outcomes-list">
+<li>Full Shopify implementation: POS setup, website build, and connected apps including Klaviyo</li>
+<li>Klaviyo email campaigns to build and convert the early subscriber base</li>
+<li>One-month social media rollout supporting the go-to-market launch and a pop-up at Capsul Studio</li>
+<li>Asana implementation to run social campaigns on a repeatable system</li>
+<li>Contracts for partnerships with independent contractors and retail stores</li>
+<li>Pitch deck for alcohol sponsors to support event partnerships</li>
+<li>Custom Looker dashboard tracking Instagram and website performance in one view</li>
+<li>Grew online following from 0 to 1,400 during the launch window</li>
+<li>Products now stocked in stores across Toronto, New York, Paris, and Montreal, and fulfilled worldwide</li>
+<li>First pop-up event returned 9x profit</li>
+</ul>
+<div class="case-cta">
+<a class="btn-solid" href="https://www.shopgitika.com/" target="_blank" rel="noopener noreferrer">Visit Website &rarr;</a>
+</div>
+</div>
+</div>
+</section>
+
+<div class="back-link-wrap">
+<a class="btn-ghost" href="portfolio.html">&larr; Back to Portfolio</a>
+</div>
+
+
+<footer id="book-consult">
+<img src="assets/sovren-logo-light.png" alt="Sovren Consulting" style="height:36px;"/>
+<div class="footer-links">
+<a href="who-we-are.html">Who We Are</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="privacy.html">Privacy Policy &amp; Terms</a>
+</div>
+<span class="footer-copy">© 2026 Sovren. All rights reserved.</span>
+</footer>
+
+<script>
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+function closeMenu() {
+  navMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  navOverlay.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+}
+function toggleMenu() {
+  const isOpen = navMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+  navOverlay.classList.toggle('open', isOpen);
+  hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+}
+hamburgerBtn.addEventListener('click', toggleMenu);
+navOverlay.addEventListener('click', closeMenu);
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+</script>
+
+</body>
+</html>
