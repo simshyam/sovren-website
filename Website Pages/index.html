@@ -82,7 +82,7 @@ border-bottom: 1px solid var(--border);
 .hero-tag { margin-top: 26px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-text); opacity: 0; animation: fadeUp 0.8s 0.45s forwards; }
 .hero-sub { margin-top: 20px; max-width: 520px; font-size: 15px; line-height: 1.9; color: var(--grey-text); font-weight: 400; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
 .hero-actions { margin-top: 52px; display: flex; gap: 16px; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
-.btn-solid { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 16px 36px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; }
+.btn-solid { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); background: #6c32d0; border: none; padding: 16px 36px; cursor: pointer; transition: opacity 0.2s; font-weight: 500; text-decoration: none; display: inline-block; line-height: 1; }
 .btn-solid:hover { opacity: 0.85; }
 .btn-ghost { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavender); background: transparent; border: 1px solid rgba(199,168,255,0.25); padding: 16px 36px; cursor: pointer; transition: border-color 0.2s, color 0.2s; font-weight: 400; text-decoration: none; }
 .btn-ghost:hover { border-color: var(--lavender); color: var(--white); }
@@ -130,20 +130,19 @@ section { border-top: 1px solid var(--border); }
 .fn-body { font-size: 12.5px; line-height: 1.85; color: var(--grey-text); font-weight: 400; }
 @media (max-width: 560px) { .function-card { flex-basis: 100%; max-width: 340px; } }
 
-.framework-diagram-wrap { display: block; }
-.framework-diagram { width: 100%; height: auto; display: block; }
-.fw-box { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.25); border-radius: 3px; width: 100%; height: 100%; padding: 18px 22px; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
-.fw-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: 0.28em; color: var(--lavender); margin: 0 0 8px; opacity: 0.8; }
-.fw-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; color: var(--white); margin: 0 0 8px; text-transform: uppercase; }
-.fw-body { font-size: 12px; line-height: 1.6; color: var(--grey-text); font-weight: 400; margin: 0; }
-.framework-mobile { display: none; max-width: 640px; margin: 0 auto; }
-.fw-mobile-item { position: relative; }
-.fw-mobile-item:not(:last-child) { margin-bottom: 44px; }
-.fw-mobile-item:not(:last-child)::after { content: '↓'; position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); color: var(--lavender); font-size: 20px; line-height: 1; }
-@media (max-width: 1099px) {
-.framework-diagram-wrap { display: none; }
-.framework-mobile { display: flex; flex-direction: column; }
-}
+.ity-flow { display: flex; flex-direction: column; max-width: 700px; margin: 0 auto; }
+.ity-step { overflow: hidden; transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease; max-height: 0; opacity: 0; margin: 0; }
+.ity-step.active { max-height: 300px; opacity: 1; margin-bottom: 12px; }
+#step2.active { max-height: 500px; }
+.ity-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 36px 32px; cursor: pointer; transition: border-color 0.2s; }
+.ity-card:hover { border-color: rgba(199,168,255,0.35); }
+.ity-card.clicked { cursor: default; }
+.ity-card.clicked:hover { border-color: rgba(199,168,255,0.1); }
+.ity-heading { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.04em; color: var(--white); margin-bottom: 10px; line-height: 1.5; }
+.ity-body { font-size: 13px; line-height: 1.9; color: var(--grey-text); }
+.ity-tap { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lavender); margin-top: 14px; opacity: 0.7; }
+.ity-card.clicked .ity-tap { display: none; }
+.ity-highlight { background: rgba(108,50,208,0.12); border: 1px solid rgba(199,168,255,0.2); padding: 36px 32px; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -184,11 +183,11 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 </div>
 
 <section class="hero">
-<p class="hero-eyebrow">Operational Consulting for Small Businesses</p>
+<p class="hero-eyebrow">Operational Consulting for Growing Businesses</p>
 <h1 class="hero-title">Systems<br/><span>That</span><br/>Scale</h1>
 <p class="hero-tag">Human first, AI-powered</p>
 <div class="hero-actions">
-<a class="btn-solid" href="portfolio.html">Portfolio</a>
+<a class="btn-solid" href="https://forms.gle/vsA7gLc9hSPCap3MA" target="_blank" rel="noopener noreferrer">Book a Discovery Call</a>
 </div>
 </section>
 
@@ -197,16 +196,48 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 <div class="section-header">
 <p class="section-label">How We Work</p>
 <h2 class="section-title">Built in order. No shortcuts.</h2>
-<p class="section-sub">Most consulting firms sell you a menu of services. We don't, because sustainable change isn't a menu, it's a sequence. Every business we work with moves through the same three phases, in order, at their own pace. No firing your team and dropping in AI overnight. No project that ends and disappears. Just a foundation, then connection, then intelligence, each one built on the last.</p>
+<p class="section-sub">The gap is no longer in intelligence, but rather how it's integrated into your administrative systems. Most consulting firms sell a menu of services. We don't; sustainable change isn't a menu, it's a sequence. Every business moves through the same three phases, in order, at their own pace.</p>
 </div>
 <div class="phases-grid">
-<div class="phase-card"><p class="phase-num">#1</p><h3 class="phase-title">Infrastructure</h3><p class="phase-body"><strong>Getting everything off paper and into systems.</strong> Before anything can be automated or intelligent, it has to exist digitally. We put the core systems in place, CRM, email, cloud storage, billing, bookkeeping, so nothing depends on one person's memory or a filing cabinet.</p></div>
-<div class="phase-card"><p class="phase-num">#2</p><h3 class="phase-title">Integration</h3><p class="phase-body"><strong>Making those systems talk to each other.</strong> A business with five disconnected tools still runs on manual labor, someone's still the glue. We connect what you have and automate the lowest-stakes, highest-friction handoffs first, so your team stops doing the busywork between systems.</p></div>
-<div class="phase-card"><p class="phase-num">#3</p><h3 class="phase-title">Autonomy</h3><p class="phase-body"><strong>Layering in AI, one task at a time.</strong> Not a rip-and-replace. We build AI capability gradually, starting with narrow, well-bounded tasks, so each layer earns its place before the next one goes in. The result is AI that takes over real work over time, without the abrupt disruption other firms sell.</p></div>
+<div class="phase-card"><p class="phase-num">#1</p><h3 class="phase-title">Infrastructure</h3><p class="phase-body"><strong>Getting everything off paper and into systems.</strong> Before anything can be automated or intelligent, it has to exist digitally so nothing depends on one person's memory or a filing cabinet.</p></div>
+<div class="phase-card"><p class="phase-num">#2</p><h3 class="phase-title">Integration</h3><p class="phase-body"><strong>Making those systems talk to each other.</strong> Five disconnected tools still means someone's the glue. We connect what you have and automate the lowest-stakes, highest-friction handoffs first.</p></div>
+<div class="phase-card"><p class="phase-num">#3</p><h3 class="phase-title">Autonomy</h3><p class="phase-body"><strong>Layering in AI, one task at a time.</strong> Not a rip-and-replace. We build capability gradually, narrow and well-bounded first, so each layer earns its place before the next goes in.</p></div>
 </div>
-<p class="phases-closing">This is what human-first, AI-powered actually looks like in practice: not a slogan, a sequence.</p>
 <div class="modules-cta">
 <a class="btn-ghost" href="who-we-are.html">Who We Are</a>
+</div>
+</div>
+</section>
+
+<section id="is-this-you">
+<div class="wrap">
+<div class="section-header">
+<h2 class="section-title">Is this you?</h2>
+</div>
+<div class="ity-flow">
+<div class="ity-step active" id="step0">
+<div class="ity-card" onclick="revealNext(0)">
+<h3 class="ity-heading">You're scaling faster than your systems can keep up.</h3>
+<p class="ity-body">Profitable. Growing. Lean team by design.</p>
+<p class="ity-tap">Click to continue ↓</p>
+</div>
+</div>
+<div class="ity-step" id="step1">
+<div class="ity-card" onclick="revealNext(1)">
+<h3 class="ity-heading">Workarounds are fine today, but expensive next year.</h3>
+<p class="ity-body">Nobody's systemizing the admin work that falls through the cracks, and the cost compounds as you scale.</p>
+<p class="ity-tap">Click to continue ↓</p>
+</div>
+</div>
+<div class="ity-step" id="step2">
+<div class="ity-highlight">
+<h3 class="ity-heading" style="color: var(--lavender);">That's where we start: the Operations Audit.</h3>
+<p class="ity-body">We map the workflow, quantify the friction costs, and hand you a phased plan. Implementation is quoted alongside as one decision.</p>
+</div>
+<div style="text-align:center;margin-top:24px;">
+<a class="btn-solid" href="https://forms.gle/vsA7gLc9hSPCap3MA" target="_blank" rel="noopener noreferrer">Book a Discovery Call</a>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -224,51 +255,6 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 </div>
 </section>
 
-<section id="framework">
-<div class="wrap">
-<div class="section-header">
-<p class="section-label">The Sovren Framework</p>
-<h2 class="section-title">5 Core Functions of a Scalable Business</h2>
-<p class="section-sub">Our systems-thinking approach applies universal principles to business operations. This framework is analyzed over time, and used as the foundation for long-term partnership; we don't deliver a project and disappear. We build in phases, layer systems on top of each other, making your business more robust over time.</p>
-</div>
-<div class="framework-diagram-wrap">
-<svg class="framework-diagram" viewBox="0 0 1030 520" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-<path d="M0,0 L10,5 L0,10 Z" fill="#c7a8ff"/>
-</marker>
-</defs>
-<line x1="220" y1="150" x2="220" y2="186" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
-<line x1="220" y1="330" x2="220" y2="366" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
-<line x1="800" y1="170" x2="800" y2="306" stroke="#c7a8ff" stroke-width="2" marker-end="url(#arrowHead)"/>
-<path d="M430,440 H510 V90 H586" stroke="#c7a8ff" stroke-width="2" fill="none" marker-end="url(#arrowHead)"/>
-<foreignObject x="10" y="10" width="420" height="140">
-<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#1</p><h3 class="fw-title">Inputs</h3><p class="fw-body">We help you identify which inputs, clients, hires, and processes, actually serve your growth instead of draining it.</p></div>
-</foreignObject>
-<foreignObject x="10" y="190" width="420" height="140">
-<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#2</p><h3 class="fw-title">Transformation</h3><p class="fw-body">We streamline how those inputs get converted into results, cutting waste while staying adaptable.</p></div>
-</foreignObject>
-<foreignObject x="10" y="370" width="420" height="140">
-<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#3</p><h3 class="fw-title">Outputs</h3><p class="fw-body">We make sure what your business produces creates value beyond itself, not just internal busywork.</p></div>
-</foreignObject>
-<foreignObject x="590" y="10" width="420" height="160">
-<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#4</p><h3 class="fw-title">Regulation</h3><p class="fw-body">We build feedback loops that catch problems early, both inside the business and in the market around it.</p></div>
-</foreignObject>
-<foreignObject x="590" y="310" width="420" height="160">
-<div xmlns="http://www.w3.org/1999/xhtml" class="fw-box"><p class="fw-num">#5</p><h3 class="fw-title">Intelligence</h3><p class="fw-body">We give your business the visibility to learn from every cycle, replicate what works, and improve on it.</p></div>
-</foreignObject>
-</svg>
-</div>
-<div class="fw-mobile-stack framework-mobile">
-<div class="fw-mobile-item fw-box"><p class="fw-num">#1</p><h3 class="fw-title">Inputs</h3><p class="fw-body">We help you identify which inputs, clients, hires, and processes, actually serve your growth instead of draining it.</p></div>
-<div class="fw-mobile-item fw-box"><p class="fw-num">#2</p><h3 class="fw-title">Transformation</h3><p class="fw-body">We streamline how those inputs get converted into results, cutting waste while staying adaptable.</p></div>
-<div class="fw-mobile-item fw-box"><p class="fw-num">#3</p><h3 class="fw-title">Outputs</h3><p class="fw-body">We make sure what your business produces creates value beyond itself, not just internal busywork.</p></div>
-<div class="fw-mobile-item fw-box"><p class="fw-num">#4</p><h3 class="fw-title">Regulation</h3><p class="fw-body">We build feedback loops that catch problems early, both inside the business and in the market around it.</p></div>
-<div class="fw-mobile-item fw-box"><p class="fw-num">#5</p><h3 class="fw-title">Intelligence</h3><p class="fw-body">We give your business the visibility to learn from every cycle, replicate what works, and improve on it.</p></div>
-</div>
-</div>
-</section>
-
 <footer id="book-consult">
 <img src="sovren-logo-light.png" alt="Sovren Consulting" style="height:36px;"/>
 <div class="footer-links">
@@ -280,6 +266,22 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 </footer>
 
 <script>
+function revealNext(i) {
+  const card = document.querySelector('#step' + i + ' .ity-card');
+  if (card.classList.contains('clicked')) return;
+  card.classList.add('clicked');
+  const next = document.getElementById('step' + (i + 1));
+  if (next) setTimeout(() => {
+    next.classList.add('active');
+    next.addEventListener('transitionend', function handler(e) {
+      if (e.propertyName === 'max-height') {
+        next.style.maxHeight = 'none';
+        next.removeEventListener('transitionend', handler);
+      }
+    });
+  }, 200);
+}
+
 const tools = ["Claude","OpenAI","Lovable","Shopify","GoDaddy","Duda","Wix","WordPress","TaxDome","Jane App","Canva","HubSpot","SEMRUSH","Salesforce","Adobe","Microsoft 365","G Suite","GitHub","Calendly","ClickUp","Make.com"];
 const track = document.getElementById('toolkit-track');
 [...tools, ...tools].forEach(t => {
