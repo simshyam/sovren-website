@@ -139,39 +139,40 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 .page-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(36px, 5vw, 60px); letter-spacing: 0.06em; color: var(--white); text-transform: uppercase; }
 .page-sub { margin: 24px auto 0; max-width: 640px; font-size: 15px; line-height: 1.9; color: var(--grey-text); }
 
-/* portfolio hub cards */
-.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.portfolio-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 44px 32px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; transition: background 0.3s, border-color 0.3s; }
-.portfolio-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
-.portfolio-card img { height: 76px; width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 28px; display: block; }
-.portfolio-card h3 { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); margin-bottom: 10px; }
-.portfolio-card p { font-size: 13px; line-height: 1.7; color: var(--grey-text); }
-.portfolio-card .view-link { margin-top: 20px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
-@media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; } }
+/* case studies accordion */
+.cs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.cs-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 36px 30px; text-align: left; cursor: pointer; transition: background 0.3s, border-color 0.3s; display: flex; flex-direction: column; align-items: flex-start; font-family: inherit; width: 100%; box-sizing: border-box; outline: none; }
+.cs-card:hover { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.cs-card:focus-visible { border-color: var(--lavender); }
+.cs-card h3 { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); margin-bottom: 12px; line-height: 1.35; }
+.cs-card p { font-size: 13px; line-height: 1.75; color: var(--grey-text); }
+.cs-card-divider { width: 100%; border-top: 1px solid var(--border); margin: 18px 0 14px; }
+.cs-card-outcome-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lavender); margin-bottom: 8px; font-weight: 700; }
+.cs-card p.cs-card-outcome { font-size: 13px; line-height: 1.7; color: var(--white); }
+@media (max-width: 900px) { .cs-grid { grid-template-columns: 1fr; } }
 
-/* case study header */
-.case-header { padding: 150px 60px 40px; border-top: none; }
-.case-header .inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: flex-start; }
-.breadcrumb { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px; }
-.case-logo { height: 68px; width: auto; max-width: 100%; object-fit: contain; object-position: left; display: block; }
+.cs-icon { display: inline-block; width: 20px; height: 20px; margin-bottom: 18px; flex-shrink: 0; color: var(--icon-color); }
+.cs-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 
-/* profile summary cards */
-.profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 56px; }
-.profile-card { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 28px 26px; }
-.profile-card .label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender); margin-bottom: 10px; }
-.profile-card .value { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); }
-@media (max-width: 760px) { .profile-grid { grid-template-columns: 1fr; } }
+.cs-expanded-panel { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.2); padding: 48px 44px; margin-bottom: 2px; position: relative; scroll-margin-top: 110px; }
+.cs-expanded-close { position: absolute; top: 28px; right: 28px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(199,168,255,0.25); background: transparent; color: var(--grey-text); cursor: pointer; font-size: 16px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; outline: none; }
+.cs-expanded-close:hover, .cs-expanded-close:focus-visible { border-color: var(--lavender); color: var(--white); }
+.cs-expanded-header { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.cs-expanded-header .cs-icon { margin-bottom: 0; width: 22px; height: 22px; }
+.cs-expanded-title { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 24px; color: var(--white); letter-spacing: 0.02em; padding-right: 40px; }
+.cs-expanded-problem { font-size: 14px; line-height: 1.8; color: var(--grey-text); max-width: 700px; margin: 14px 0 28px 30px; }
+.cs-divider { border-top: 1px solid var(--border); margin: 0 0 28px; }
+.cs-expanded-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender); margin-bottom: 10px; font-weight: 700; }
+.cs-expanded-block { margin-bottom: 28px; max-width: 760px; margin-left: 30px; }
+.cs-expanded-block:last-child { margin-bottom: 0; }
+.cs-expanded-block p { font-size: 14.5px; line-height: 1.9; color: var(--white); }
+.cs-expanded-block.overview p { color: var(--grey-text); }
 
-.case-block { margin-bottom: 56px; }
-.case-block h3 { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 24px; color: var(--white); margin-bottom: 20px; letter-spacing: 0.04em; }
-.case-block p { font-size: 14.5px; line-height: 1.95; color: var(--grey-text); margin-bottom: 18px; max-width: 780px; }
-.case-block p:last-child { margin-bottom: 0; }
-.outcomes-list { list-style: none; padding: 0; }
-.outcomes-list li { position: relative; padding-left: 26px; font-size: 14.5px; line-height: 1.8; color: var(--grey-text); margin-bottom: 14px; max-width: 780px; }
-.outcomes-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: var(--lavender); }
-
-.case-cta { margin-top: 8px; }
-.back-link-wrap { display: flex; justify-content: center; margin-top: 60px; }
+.cs-pills { display: flex; flex-wrap: wrap; gap: 2px; }
+.cs-pill { background: var(--card-bg); border: 1px solid rgba(199,168,255,0.1); padding: 16px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; font-family: 'Raleway', sans-serif; font-size: 13px; font-weight: 600; color: var(--white); transition: background 0.3s, border-color 0.3s; flex: 1 1 220px; outline: none; }
+.cs-pill:hover, .cs-pill:focus-visible { background: var(--card-bg-hover); border-color: rgba(199,168,255,0.35); }
+.cs-pill .plus { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(199,168,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--lavender); flex-shrink: 0; }
+@media (max-width: 560px) { .cs-expanded-panel { padding: 40px 24px; } .cs-expanded-problem, .cs-expanded-block { margin-left: 0; } }
 </style>
 </head>
 <body>
@@ -194,31 +195,12 @@ footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24
 <section class="page-hero">
 <p class="page-eyebrow">Portfolio</p>
 <h1 class="page-title">Case Studies</h1>
-<p class="page-sub">Sovren works with owner-operated small businesses in various stages of their journey. Whether you are an early-stage operator running a practice part-time, or an established operator running on outdated processes, we are confident we can add value.</p>
+<p class="page-sub">A look into the administrative projects we've worked on, and how it's helped our clients operate better. Click a card to see the full engagement.</p>
 </section>
 
 <section id="portfolio-hub">
 <div class="wrap">
-<div class="portfolio-grid">
-<a class="portfolio-card" href="portfolio-mindful-methodology.html">
-<img src="mindful-methodology-logo-white.png" alt="Mindful Methodology logo"/>
-<h3>Mindful Methodology</h3>
-<p>Registered therapist offering online mental health support services.</p>
-<span class="view-link">View case study &rarr;</span>
-</a>
-<a class="portfolio-card" href="portfolio-united-accounting.html">
-<img src="united-accounting-logo-white.png" alt="United Accounting logo"/>
-<h3>United Accounting</h3>
-<p>Tax and bookkeeping firm serving the GTA region for 20+ years.</p>
-<span class="view-link">View case study &rarr;</span>
-</a>
-<a class="portfolio-card" href="portfolio-gitika.html">
-<img src="gitika-logo-white.png" alt="GITIKA logo" style="height:68px;"/>
-<h3>GITIKA</h3>
-<p>Fashion designer and retailer based in Toronto, selling worldwide.</p>
-<span class="view-link">View case study &rarr;</span>
-</a>
-</div>
+<div id="csRoot"></div>
 </div>
 </section>
 
@@ -252,6 +234,121 @@ hamburgerBtn.addEventListener('click', toggleMenu);
 navOverlay.addEventListener('click', closeMenu);
 navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
+const caseStudies = [
+  {
+    title: 'Shopify-to-GL Reconciliation',
+    problem: 'Reconciling Shopify sales to the general ledger meant manually matching every order against revenue entries by hand, every period.',
+    outcome: 'Monthly reconciliation workflow steps reduced by 50%, starting with meticulous manual matching to a bucketed review process.',
+    overview: 'We built a microapp that pulls period-specific Shopify sales and automatically buckets them against ERP GL entries, splitting recorded revenue, unearned revenue, returns, and other categories so the merchant sees exactly how their Shopify numbers map to their books.',
+    icon: `<path d="M7 10h14l-4 -4" /><path d="M17 14h-14l4 4" />`
+  },
+  {
+    title: 'Automated Ticket Creation',
+    problem: 'Support agents spent hours a day transcribing calls and formatting tickets by hand.',
+    outcome: 'Ticket creation time cut by ~80%, reclaiming 20+ hours a week.',
+    overview: 'We integrated a transcription tool into the support workflow that turns live call notes and inbound emails into fully formatted ticket submissions, complete with automated follow-ups and status updates. Agents review and submit instead of write from scratch.',
+    icon: `<path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />`
+  },
+  {
+    title: 'Automated Royalties Reporting',
+    problem: 'Tracking royalties per transaction meant pulling data and building reports from scratch every cycle.',
+    outcome: 'Royalties reporting went from hours of manual compilation to a single automated pull.',
+    overview: "We built a microapp connected to the merchant's system of record that tracks royalties at the transaction level and generates custom reports on demand. No spreadsheet assembly, no manual cross-referencing.",
+    icon: `<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-5" /><path d="M12 17v-1" /><path d="M15 17v-3" />`
+  },
+  {
+    title: 'Calendar and Task Management Agent',
+    problem: 'A founder managing 7-8 meetings a day tracked bookings, reschedules, and follow-ups on a notepad, with no assistant or system.',
+    outcome: '365+ hours of calendar admin returned to the founder annually.',
+    overview: "We built a voice-to-text agent connected to Google Calendar that lets the founder speak naturally to book, reschedule, or cancel meetings. The same agent pulls follow-up tasks from recorded calls and maintains a structured weekly backlog, giving the founder a consistent operating rhythm for the first time.",
+    icon: `<path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M16 3l0 4" /><path d="M8 3l0 4" /><path d="M4 11l16 0" /><path d="M8 15h2v2h-2z" />`
+  },
+  {
+    title: 'Expense Processing Automation',
+    problem: 'Every expense passed through four manual steps, from organizing documents to chasing treasury for payment, before it hit the books.',
+    outcome: '~15 hours/month of manual expense processing eliminated end to end.',
+    overview: "We built an agent that replicates the full expense workflow: capturing incoming documents, logging them to the tracker, updating status in real time, and sending payment reminders to treasury on schedule. Human involvement only kicks in at the approval layer.",
+    icon: `<path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" />`
+  },
+  {
+    title: 'Social Media Content Workflow',
+    problem: 'A solo founder spent hours on ideation and writing for every post, creating everything from scratch.',
+    outcome: 'Content creation time cut by ~5 hours a week.',
+    overview: "We built an AI-powered content workflow that takes the founder's raw input (voice recordings, session notes, topic ideas) and produces formatted, on-brand content on command. The founder's voice and expertise drive the output; the system handles structure, SEO relevance, and multi-format repurposing.",
+    icon: `<path d="M18 8a3 3 0 0 1 0 6" /><path d="M10 8v11a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1v-5" /><path d="M12 8h0l4.524 -3.77a.9 .9 0 0 1 1.476 .692v12.156a.9 .9 0 0 1 -1.476 .692l-4.524 -3.77h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h8" />`
+  },
+  {
+    title: 'Shopify Store Build and Launch',
+    problem: 'A D2C founder ready to launch who wanted the infrastructure built right from day one.',
+    outcome: 'Went from zero to a fully operational storefront, ready before the first order came in.',
+    overview: "We built the full commercial foundation end to end: storefront, email marketing, pre-launch social campaigns, shipping, and the operational backbone behind it so the founder could make informed decisions on purchasing, demand, and growth from the start. Every system was connected and ready to scale before the first sale, not retrofitted after.",
+    icon: `<path d="M3 21l18 0" /><path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" /><path d="M5 21l0 -10.15" /><path d="M19 21l0 -10.15" /><path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />`
+  }
+];
+
+function iconColor(i) { return i % 2 === 0 ? 'var(--lavender)' : 'var(--purple-mid)'; }
+function iconHTML(cs, i) { return `<span class="cs-icon" style="--icon-color:${iconColor(i)}"><svg viewBox="0 0 24 24">${cs.icon}</svg></span>`; }
+
+const csRoot = document.getElementById('csRoot');
+let expandedIndex = null;
+
+function cardHTML(cs, i) {
+  return `<button class="cs-card" type="button" data-index="${i}">
+${iconHTML(cs, i)}
+<h3>${cs.title}</h3>
+<p>${cs.problem}</p>
+<div class="cs-card-divider"></div>
+<p class="cs-card-outcome-label">Outcome</p>
+<p class="cs-card-outcome">${cs.outcome}</p>
+</button>`;
+}
+
+function pillHTML(cs, i) {
+  return `<button class="cs-pill" type="button" data-index="${i}"><span class="plus">+</span>${cs.title}</button>`;
+}
+
+function renderCaseStudies() {
+  if (expandedIndex === null) {
+    csRoot.innerHTML = `<div class="cs-grid">${caseStudies.map((cs, i) => cardHTML(cs, i)).join('')}</div>`;
+    csRoot.querySelectorAll('.cs-card').forEach(el => el.addEventListener('click', () => {
+      expandedIndex = parseInt(el.dataset.index, 10);
+      renderCaseStudies();
+    }));
+  } else {
+    const cs = caseStudies[expandedIndex];
+    const others = caseStudies.map((c, i) => ({ c, i })).filter(o => o.i !== expandedIndex);
+    csRoot.innerHTML = `
+<div class="cs-expanded-panel">
+<button class="cs-expanded-close" type="button" aria-label="Close case study">&times;</button>
+<div class="cs-expanded-header">
+${iconHTML(cs, expandedIndex)}
+<h3 class="cs-expanded-title">${cs.title}</h3>
+</div>
+<p class="cs-expanded-problem">${cs.problem}</p>
+<div class="cs-divider"></div>
+<div class="cs-expanded-block">
+<p class="cs-expanded-label">Outcome</p>
+<p>${cs.outcome}</p>
+</div>
+<div class="cs-expanded-block overview">
+<p class="cs-expanded-label">Project Overview</p>
+<p>${cs.overview}</p>
+</div>
+</div>
+<div class="cs-pills">${others.map(o => pillHTML(o.c, o.i)).join('')}</div>`;
+    csRoot.querySelector('.cs-expanded-close').addEventListener('click', () => {
+      expandedIndex = null;
+      renderCaseStudies();
+    });
+    csRoot.querySelectorAll('.cs-pill').forEach(el => el.addEventListener('click', () => {
+      expandedIndex = parseInt(el.dataset.index, 10);
+      renderCaseStudies();
+    }));
+    csRoot.querySelector('.cs-expanded-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+renderCaseStudies();
 </script>
 
 </body>
